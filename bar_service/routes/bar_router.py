@@ -15,7 +15,8 @@ async def bar_endpoint(foo_id: int, bar_service: BarService = Depends(get_bar_se
 
     bar_response: BarResponse = BarResponse(
         foo_id=bar.foo_id,
-        bar_name=bar.bar_name
+        bar_name=bar.bar_name,
+        bar_timestamp=bar.bar_timestamp
     )
 
     return bar_response

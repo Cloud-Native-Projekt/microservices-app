@@ -6,3 +6,4 @@ class Bar(BaseModel):
     bar_id: int
     bar_name: str
     bar_description: str
+    bar_timestamp: str
