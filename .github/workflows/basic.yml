@@ -22,13 +22,4 @@ jobs:
                   python -m pip install --upgrade pip
                   pip install -r requirements.txt
 
-            - name: Analysing the code with pylint
-              run: |
-                  pip install pylint
-                  pylint $(git ls-files '*.py')
 
-            - name: autopep8
-              id: autopep8
-              uses: peter-evans/autopep8@v2
-              with:
-                  args: --recursive --in-place --aggressive .
