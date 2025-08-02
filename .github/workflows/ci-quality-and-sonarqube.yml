@@ -11,6 +11,10 @@ on:
     branches:
       - 'feature/**'
 
+env:
+  SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+  SONAR_TOKEN:    ${{ secrets.SONAR_TOKEN }}
+
 jobs:
   sonar:
     name: SonarQube Analysis
@@ -28,14 +32,14 @@ jobs:
 
       - name: Install SonarScanner CLI
         run: |
-          curl -sSLo sonar-scanner-cli.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-7.1.0.4889-linux-x64.zip
+          curl -sSLo sonar-scanner-cli.zip \
+            https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-7.1.0.4889-linux-x64.zip
           unzip -q sonar-scanner-cli.zip
-          mv sonar-scanner-*/ sonar-scanner
+
+      - name: Add SonarScanner to PATH
+        run: echo "${{ github.workspace }}/sonar-scanner/bin" >> $GITHUB_PATH
 
       - name: Run SonarQube Scanner
-        env:
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-          SONAR_TOKEN:    ${{ secrets.SONAR_TOKEN }}
         run: |
           # Determine current branch name:
           if [ "${{ github.event_name }}" = "pull_request" ]; then
