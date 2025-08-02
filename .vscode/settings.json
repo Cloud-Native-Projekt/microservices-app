@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "cloud-native-projekt",
+        "projectKey": "Cloud-Native-Projekt_microservices-app"
+    }
+}
